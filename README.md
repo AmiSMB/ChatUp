@@ -48,8 +48,8 @@ To do so, execute those three commands:
 
 ```sh
 docker run --name chatup-redis -d redis # Create a redis server
-docker run --link chatup-redis:redis -e CHATUP_REDISHOST=redis --name chatup-dispatcher -d geekuillaume/chatup ./entrypoint.js dispatcher # Start the dispatcher service in charge of the load-balacing
-docker run --link chatup-redis:redis -e CHATUP_REDISHOST=redis --name chatup-worker -d geekuillaume/chatup ./entrypoint.js worker --use-container-ip # Start the worker service in charge of all the communication
+docker run --link chatup-redis:redis -e CHATUP_REDISHOST=redis --name chatup-dispatcher -d geekuillaume/chatup dispatcher # Start the dispatcher service in charge of the load-balacing
+docker run --link chatup-redis:redis -e CHATUP_REDISHOST=redis --name chatup-worker -d geekuillaume/chatup worker --use-container-ip # Start the worker service in charge of all the communication
 ```
 
 You can then get the dispatcher IP with `docker inspect --format '{{ .NetworkSettings.IPAddress }}' chatup-dispatcher` and use the example [client page](http://rawgit.com/geekuillaume/ChatUp/master/examples/client/index.html) indicating this IP to test it.
